@@ -4,7 +4,7 @@ import org.squeryl._
 
 
 /**
- * Instagram InstagramUser
+ * Instagram user
  * @param id
  * @param instagramId
  * @param email
