@@ -14,3 +14,9 @@ trait InstagramService {
   def apply[A,B](value: A)(implicit req: RequestConverter[A], res:ResponseConverter[B]): B = res(apply(req(value)))
 
 }
+
+object InstagramServiceInvoker extends InstagramService {
+
+  def apply(request: InstagramRequest) = new InstagramResponse(request.promise.await(request.timeout, request.timeUnit).get.json)
+
+}

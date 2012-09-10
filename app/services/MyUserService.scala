@@ -2,12 +2,13 @@ package services
 
 import collection._
 
-import securesocial.core.{UserId, SocialUser, UserService}
+import securesocial.core.{UserServicePlugin, UserId, SocialUser, UserService}
+import play.api._
 
 /**
  * In-memory implementation of UserService
  */
-class MyUserService extends UserService {
+class MyUserService(application: Application) extends UserServicePlugin(application) {
 
   private val users: mutable.Map[UserId, SocialUser] = mutable.Map.empty
 

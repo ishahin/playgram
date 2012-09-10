@@ -1,14 +1,8 @@
 package core
 
-import play.api.libs.json.JsValue
-import play.api.mvc.WebSocket
 import play.api.libs.ws.{Response, WS}
-import collection._
-import play.api.libs.concurrent.{NotWaiting, Promise}
+import play.api.libs.concurrent.Promise
 import java.util.concurrent.TimeUnit
-import org.specs2.time.Time
-import org.squeryl.dsl.ast.PrefixOperatorNode
-import org.springframework.beans.NotWritablePropertyException
 
 /**
  * Created with IntelliJ IDEA.
