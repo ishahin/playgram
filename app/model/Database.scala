@@ -1,4 +1,5 @@
-import model.InstagramUser
+package model
+
 import org.squeryl._
 
 /**

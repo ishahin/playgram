@@ -3,3 +3,10 @@ target
 *.log
 .idea*
 .DS_Store
+.cache
+.metadata
+.project
+.settings
+.target
+.classpath
+bin
