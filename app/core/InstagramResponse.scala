@@ -19,5 +19,3 @@ case class InstagramResponse(json: JsValue) {
 
 }
 
-trait ResponseConverter[T] extends ((InstagramResponse) => T)
-

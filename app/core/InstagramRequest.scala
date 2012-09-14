@@ -2,7 +2,7 @@ package core
 
 import play.api.libs.ws.{Response, WS}
 import play.api.libs.concurrent.Promise
-import java.util.concurrent.TimeUnit
+import play.api.libs.json.{Reads, JsValue}
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,25 +13,17 @@ import java.util.concurrent.TimeUnit
  */
 trait InstagramRequest {
 
-  def buildWsRequest: WS.WSRequestHolder
+  def response: Promise[Response]
 
-  def call: (WS.WSRequestHolder) => Promise[Response]
+  def instagramResponse: Promise[InstagramResponse] = response map { r => InstagramResponse(r.json) }
 
-  def promise: Promise[Response] =  call(buildWsRequest)
-
-  def timeout: Int
-
-  def timeUnit: TimeUnit = TimeUnit.SECONDS
+  def as[A](implicit reader:Reads[A]): Promise[A] = instagramResponse map { r => reader.reads(r.json)}
 
 }
+
+
 
 
 abstract class InstagramGetRequest(val url: String, parameters:(String, String)* ) extends InstagramRequest {
-
-  val buildWsRequest = WS.url(url).withQueryString(parameters:_*)
-
-  val call: (WS.WSRequestHolder) => Promise[Response] = {wsr => wsr.get()}
-
+  def response = WS.url(url).withQueryString(parameters:_*).get()
 }
-
-trait RequestConverter[T] extends ((T)=>InstagramRequest)

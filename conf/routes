@@ -8,15 +8,8 @@ GET     /                           controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-# Login page
-GET     /login                      securesocial.controllers.LoginPage.login
-GET     /logout                     securesocial.controllers.LoginPage.logout
+# Authentication entry point
+GET     /authenticate/1                     controllers.Authentication.oauthPhase1
+GET     /authenticate/2                     controllers.Authentication.oauthPhase2
 
-# User Registration
-GET     /signup                     securesocial.controllers.Registration.signUp
-POST    /signup                     securesocial.controllers.Registration.handleSignUp
-
-# Providers entry points
-GET     /authenticate/:provider     securesocial.controllers.LoginPage.authenticate(provider)
-POST    /authenticate/:provider     securesocial.controllers.LoginPage.authenticateByPost(provider)
 
