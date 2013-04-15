@@ -10,15 +10,26 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     // Add your project dependencies here,
     jdbc,
-    anorm,
     SecureSocial.dependency
-  )
+  )  ++ Slick.dependencies
 
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
 
     resolvers += SecureSocial.repository
     // Add your own project settings here      
+  )
+
+}
+
+object Slick extends Build {
+
+  private val version = "1.0.0"
+
+  val dependencies = Seq(
+    "com.typesafe.slick" %% "slick" % version,
+    "org.slf4j" % "slf4j-nop" % "1.6.4",
+    "com.h2database" % "h2" % "1.3.170"
   )
 
 }
